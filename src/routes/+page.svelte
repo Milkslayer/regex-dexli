@@ -25,6 +25,7 @@
 		type Flags,
 		type UrlState
 	} from '$lib/url-state';
+	import { hydrateFromUrl } from '$lib/hydrate';
 
 	// Frictionless first-load defaults (bar item 1): visible matches on entry,
 	// no overlay/walkthrough required to see the tool at work.
@@ -46,16 +47,14 @@
 	let urlState = $derived<UrlState>({ pattern, testText, flags });
 
 	onMount(() => {
-		const fromUrl = readUrlState();
-		const hasAny =
-			fromUrl.pattern !== undefined ||
-			fromUrl.testText !== undefined ||
-			fromUrl.flags !== undefined;
-		if (hasAny) {
-			pattern = fromUrl.pattern ?? '';
-			testText = fromUrl.testText ?? '';
-			flags = fromUrl.flags ? { ...fromUrl.flags } : { ...EMPTY_FLAGS };
-		}
+		const next = hydrateFromUrl(readUrlState(), {
+			pattern: DEFAULT_PATTERN,
+			testText: DEFAULT_TEST_TEXT,
+			flags: DEFAULT_FLAGS
+		});
+		pattern = next.pattern;
+		testText = next.testText;
+		flags = next.flags;
 		initialized = true;
 	});
 
