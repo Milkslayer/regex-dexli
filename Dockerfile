@@ -25,7 +25,7 @@ WORKDIR /app
 # M; fixable post-publish without a rebuild contract change.
 LABEL org.opencontainers.image.title="regex" \
       org.opencontainers.image.description="Live regex tester with URL-shareable state — type a pattern, see matches highlight as you go. Part of the dexli.dev tiny-tools family." \
-      org.opencontainers.image.source="https://github.com/Milkslayer/regex-dexli" \
+      org.opencontainers.image.source="https://github.com/dexli-dev/regex-dexli" \
       org.opencontainers.image.licenses="UNLICENSED"
 
 # Fallback defaults only — every value is overridable at run time via -e.
